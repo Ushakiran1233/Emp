@@ -1,0 +1,70 @@
+<h1>{{title}}</h1>
+
+<!-- Table to display employees -->
+<div class="container">
+  <table border="4">
+    <thead>
+      <tr>
+        <th>EmployeeNo</th>
+        <th>EmployeeName</th>
+        <th>EmployeeSalary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of Employee">
+        <td>{{ employee.empno }}</td>
+        <td>{{ employee.empname }}</td>
+        <td>{{ employee.salary }}</td>
+        <td>
+          <button (click)="editEmployee(employee)">Edit</button>
+          <button (click)="DeleteEmp(employee.empno)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br><br>
+
+<!-- Form to add/update employees -->
+<div class="container">
+  <form (ngSubmit)="updateEmployee()" *ngIf="isEditing">
+    <div>
+      <label for="Empno">Employee Number:</label>
+      <input id="Empno" [(ngModel)]="employee.empno" name="Empno" [readonly]="isEditing"/>
+    </div>
+    <div>
+      <label for="Empname">Employee Name:</label>
+      <input id="Empname" [(ngModel)]="employee.empname" name="Empname" required />
+
+    </div>
+    <div>
+      <label for="Salary">Salary:</label>
+      <input id="Salary" [(ngModel)]="employee.salary" name="Salary" required />
+
+    </div>
+    <button type="submit">{{  'Update Employee'}}</button>
+  </form>
+</div>
+<br><br>
+<div class="container">
+  <form (ngSubmit)="addEmployee()" *ngIf="!isEditing" >
+    <div>
+      <label for="Empno">Employee Number:</label>
+      <input id="Empno" [(ngModel)]="newEmployee.empno" name="Empno" [readonly]="isEditing"/>
+    </div>
+    <div>
+      <label for="Empname">Employee Name:</label>
+      <input id="Empname" [(ngModel)]="newEmployee.empname" name="Empname" required />
+
+    </div>
+    <div>
+      <label for="Salary">Salary:</label>
+      <input id="Salary" [(ngModel)]="newEmployee.salary" name="Salary" required />
+
+    </div>
+    <button type="submit">{{ 'Add Employee' }}</button>
+
+  </form>
+</div>
